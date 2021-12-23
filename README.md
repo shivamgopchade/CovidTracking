@@ -14,3 +14,8 @@ To toggle I have destroyed the chart obj first then added new chart element.
 However,the prj is not still completed.UI needs to be completed.
 Due to my own time constraints,I will be doing it later.
 Thanks!!
+
+
+
+(edit on 23-12-2021)
+The above drawbacks has been removed.
