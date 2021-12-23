@@ -1,7 +1,13 @@
 {% extends 'base.html' %}
+
 {% block content %}
-<div class="form-canvas">
-Logged out successfully!!<br>
-<p class="form-text">Login again:</p><a href="{% url 'login' %}">Login</a>
+<div class="container">
+<div class="form">
+Logged out successfully!!<br><br>
+<a href="{% url 'login' %}">
+<button class="btn positive">Login again?</button>
+</a>
 </div>
-    {% endblock%}
+</div>
+
+{% endblock%}

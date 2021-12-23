@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from .views import home
+import covid_tracker.views as main_view
 import user.views as user_view
 import health.views as health_views
 import django.contrib.auth.views as auth_views
@@ -29,8 +30,9 @@ urlpatterns = [
     path('login/',auth_views.LoginView.as_view(template_name='user/login.html'),name='login'),
     path('logout/',auth_views.LogoutView.as_view(template_name='user/logout.html'),name='logout'),
     path('profile/',user_view.profile,name="profile"),
-    path('create_report/new/',health_views.ReportCreateView.as_view(),name='create_report'),
+    path('create_report/new/',health_views.create_report,name='create_report'),
     path('get_report/',health_views.get_report,name='get_report'),
+    path('delete_user/',main_view.delete_user,name="delete_user"),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

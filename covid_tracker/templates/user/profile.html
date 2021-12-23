@@ -2,16 +2,20 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-<div class="form-canvas">
-<img src="{{user.profile.image.url}}" alt="{{ user.username }} image" class="profile-img">
-  <form method="POST" enctype="multipart/form-data">
+<div class="container">
+<img src="{{user.profile.image.url}}" alt="{{ user.username }} image">
+  
+<form method="POST" enctype="multipart/form-data">
   {% csrf_token %}
+  <div class="form">
   <fieldset class="form-group">
   {{ uform|crispy }}
   {{ pform|crispy }}
-  </fieldset>
-  <button type="submit" class="profile-submit">SAVE</button>
-
+    <button type="submit">SAVE</button>
+</fieldset>
+  
+</div>
 </form>
 </div>
+
 {% endblock %}

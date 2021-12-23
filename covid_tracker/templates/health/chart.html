@@ -1,35 +1,42 @@
 {% extends 'base.html '%}
 
 {% block content %}
-<div class="form-canvas">
+<div class="container">
+  <div class="form">
+{% if user.last_name == '2' %}
 <form method="POST">
     {% csrf_token %}
     <fieldset class="form-group">
         <input placeholder="Enter username" type="text" name="username">
     </fieldset>
 
-    <div class="form-group">
         <button type="submit">GET REPORT</button>
-    </div>
-</form>
-{% if avail %}
 
-<button onclick="display_chart({{ o2|safe }},'O2')" class="chart-btn">O2</button>
-<button onclick="display_chart({{ sugar|safe }},'SUGAR:%')" class="chart-btn">Sugar</button>
-<button onclick="display_chart({{ bp|safe }},'BP:mm Hg')" class="chart-btn">Blood Pressure</button>
-<button onclick="display_chart({{ crp|safe }},'CRP:mg/L')" class="chart-btn">CRP</button>
-<div id="container1" style="width: 50%;" class="chart" >
+</form>
+</div>
+{% endif %}
+
+{% if avail %}
+<button onclick="display_chart({{ o2|safe }},'O2')" class="opt-btn">O2</button>
+<button onclick="display_chart({{ sugar|safe }},'SUGAR:%')" class="opt-btn">Sugar</button>
+<button onclick="display_chart({{ bp|safe }},'BP:mm Hg')" class="opt-btn">BP</button>
+<button onclick="display_chart({{ crp|safe }},'CRP:mg/L')" class="opt-btn">CRP</button>
+<br>
+<div id="container1" class="chart" >
     <canvas id="chart1" ></canvas><br>
 </div>
 <br>
-    <button onclick="type_plot('line')" class="chart-btn">Line</button>
-    <button onclick="type_plot('pie')" class="chart-btn">Pie</button>
-    <button onclick="type_plot('bar')" class="chart-btn">Bar</button>
-    <button onclick="type_plot('radar')" class="chart-btn">Radar</button>
-<button onclick="type_plot('doughnut')" class="chart-btn">Doughnut</button>
-<button onclick="type_plot('polarArea')" class="chart-btn">Polar</button>
-
-
+    <button onclick="type_plot('line')" class="opt-btn">Line</button>
+    <button onclick="type_plot('pie')" class="opt-btn">Pie</button>
+    <button onclick="type_plot('bar')" class="opt-btn">Bar</button>
+    <button onclick="type_plot('radar')"class="opt-btn">Radar</button>
+<button onclick="type_plot('doughnut')" class="opt-btn">Doughnut</button>
+<button onclick="type_plot('polarArea')" class="opt-btn">Polar</button>
+{% else %}
+<div class="form">
+Enter valid username
+</div>
+{% endif %}
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
@@ -68,14 +75,15 @@
           data: {
             datasets: [{
               data: d,
-              backgroundColor: ['rgb(255, 99, 132)','blue','purple','gray'],
-        borderColor: 'rgb(255, 99, 132)',
+              backgroundColor: ['yellow','blue','purple','gray'],
+        borderColor: 'rgb(0,0,0)',
               label: labled
             }],
             labels: {{ labels|safe }}
           },
           options: {
-            responsive: true
+            responsive: true,
+            maintainAspectRatio: false
           }
         };
         var ctx = document.getElementById(id).getContext('2d');
@@ -85,10 +93,5 @@
 
 
   </script>
-{% else %}
-
-    {{ msg }}
-
-{% endif %}
-{% endblock %}
 </div>
+{% endblock %}

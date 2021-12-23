@@ -4,31 +4,33 @@
 <head>
     <meta charset="UTF-8">
     <title>Medico+</title>
-    <link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Comforter&family=Comforter+Brush&family=Open+Sans+Condensed:ital,wght@1,300&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Comforter&family=Comforter+Brush&family=Open+Sans+Condensed:ital,wght@1,300&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
 </head>
 <body>
 <div class="nav-bar">
+    
+    
+    <div class="column-left">
 {% if user.is_authenticated %}
-    <div class="nav-text">Hello {{ user.username }}</div>
+    <div class="column-right">Hello {{ user.username }}</div>
+    <a href="{% url 'home' %}">Home</a>
     <a href="{% url 'profile' %}">Profile</a>
     <a href="{% url 'logout' %}">Logout</a>
+    
     {% if user.last_name == '2' %}
     <a href="{% url 'create_report' %}">Create Report</a>
     {% endif %}
     <a href="{% url 'get_report' %}">Get Report</a>
+    <a href="{% url 'delete_user' %}">Quit Surveillance</a>
 {% else %}
-    <div class="nav-text">Hello world!!</div>
+
     <a href="{% url 'login' %}">Login</a>
     <a href="{% url 'register' %}">Register</a>
 {% endif %}
+    </div>
 </div>
+
 {% block content %}
 {% endblock %}
 </body>

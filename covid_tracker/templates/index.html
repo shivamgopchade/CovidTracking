@@ -1,11 +1,25 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="form-canvas">
+<div class="container">
+    <div class="form">
     Hello
-    <a href="{% url 'profile' %}" class="index-text">
-         {{ user.username }}
-    </a>
-    
+        {{ user.username }}
+    <br>
+    Welcome to <h1>Medico+</h1>
+    {% if user.is_authenticated %}
+    <br>
+    Day of Surveillance:<span  style="color:white"> {{delta}} th day </span><br>
+    Under Surveillance of: <span style="color:white">Dr. {{ user.first_name }} </span> <br>
+    Last report date: <span style="color:white">{{ date }}</span><br>
+    Get Your COVID reports:    
+    <a href="{% url 'get_report' %}"><button class="btn warning">Reports</button></a>
+    <br>
+    {% if user.last_name == '2' %}
+    Hey Dr.{{ user.username }} Want to Create Covid reports? :
+    <a href="{% url 'create_report' %}"><button class="btn secondary">Create</button></a>
+    {% endif %}
+    {% endif %}
+</div>
 </div>
 {% endblock %}
